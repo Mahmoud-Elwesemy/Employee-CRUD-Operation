@@ -1,0 +1,71 @@
+<div>
+    <h2>{{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}</h2>
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
+      <!-- First Name -->
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" [(ngModel)]="employee.firstName" name="firstName" 
+               required minlength="3" maxlength="12" #firstName="ngModel">
+        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="error-message">
+          <div *ngIf="firstName.errors?.['required']">First Name is required</div>
+          <div *ngIf="firstName.errors?.['minlength']">
+            Minimum 3 characters required
+          </div>
+          <div *ngIf="firstName.errors?.['maxlength']">
+            Maximum 12 characters allowed
+          </div>
+        </div>
+      </div>
+  
+      <!-- Last Name -->
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" [(ngModel)]="employee.lastName" name="lastName" 
+               required minlength="3" maxlength="12" #lastName="ngModel">
+        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="error-message">
+          <div *ngIf="lastName.errors?.['required']">Last Name is required</div>
+          <div *ngIf="lastName.errors?.['minlength']">
+            Minimum 3 characters required
+          </div>
+          <div *ngIf="lastName.errors?.['maxlength']">
+            Maximum 12 characters allowed
+          </div>
+        </div>
+      </div>
+  
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" [(ngModel)]="employee.email" name="email" 
+               required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com)$" #email="ngModel"
+               (input)="checkEmailProgress()">
+             
+               <!-- Validation Error -->
+               <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+                 <div *ngIf="email.errors?.['required']">Email is required</div>
+                 <div *ngIf="email.errors?.['pattern']">
+                   Invalid email format. Required format:
+                   <ul class="email-requirements">
+                     <li>At least 2 characters before &#64;</li>
+                     <li>Valid domain name after &#64;</li>
+                     <li>Must end with .com</li>
+                   </ul>
+                   Example: <span class="email-example">john&#64;company.com</span>
+                 </div>
+               </div>
+             </div>
+  
+      <!-- Position -->
+      <div class="form-group">
+        <label for="position">Position:</label>
+        <input id="position" [(ngModel)]="employee.position" name="position" required>
+      </div>
+  
+      <button type="submit" [disabled]="!form.valid|| loading">
+        {{ isEditMode ? 'Update' : 'Add' }}
+        <div *ngIf="loading" class="loading-spinner">
+          <img src="https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif" alt="Loading...">
+        </div>
+      </button>
+    </form>
+  </div>

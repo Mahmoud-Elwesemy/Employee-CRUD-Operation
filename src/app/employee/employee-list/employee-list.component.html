@@ -1,0 +1,59 @@
+<div>
+    <h1>Employee Management</h1>
+    <button (click)="openAddEmployeeForm()">Add New Employee</button>
+  </div>
+  <div>
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search employees"
+    />
+    <button (click)="search()">Search</button>
+  </div>
+
+<div *ngIf="loading" class="loading-spinner">
+  <img src="https://media.tenor.com/wpSo-8CrXqUAAAAi/loading-loading-forever.gif" alt="Loading...">
+</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Position</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.position }}</td>
+        <td>
+          <button (click)="openEditEmployeeForm(employee)">Edit</button>
+          <button class="delete" (click)="deleteEmployee(employee.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-controls">
+    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+      Previous
+    </button>
+    
+    <span class="page-info">Page {{ currentPage }}</span>
+  
+    <button (click)="onPageChange(currentPage + 1)" [disabled]="employees.length < pageSize">
+      Next
+    </button>
+  
+    <select [(ngModel)]="pageSize" (change)="onPageSizeChange(pageSize)">
+      <option value="5">5 per page</option>
+      <option value="10">10 per page</option>
+      <option value="20">20 per page</option>
+    </select>
+  </div>

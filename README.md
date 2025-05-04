@@ -14,7 +14,7 @@ Integrated with a .NET Core backend API.
 🌐 Live Demo
 The application is fully deployed and available at:
 
-🔗 https://angular-app-b94fc.web.app
+🔗 [https://angular-app-b94fc.web.app](https://angular-app-b94fc.web.app/)
 
 ☁️ Deployment
 The Angular application is deployed via Firebase Hosting.

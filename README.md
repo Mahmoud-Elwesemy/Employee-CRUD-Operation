@@ -4,7 +4,7 @@ This is the frontend application for the Employee Management Operations system, 
 🚀 Features
 Developed with the latest version of Angular.
 
-Performs GRCD
+Performs GRUD
 operations for employees (Add, Update, Delete, Search, and List).
 
 Designed with modular components and services for maintainability and scalability.
